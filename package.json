@@ -1,0 +1,23 @@
+{
+  "name": "exp-pipeline-map",
+  "version": "0.0.1",
+  "description": "Pipe-based interface for object transformations",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/tests.js"
+  },
+  "keywords": [
+    "Javascript",
+    "Expressen",
+    "Pipe",
+    "operator",
+    "transformations",
+    "object"
+  ],
+  "author": "Johan Tell",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
