@@ -1,4 +1,4 @@
-# Expressen Pipeline Mapper
+# Expressen Pipeline Map
 
 An interface to make transformations of javascript object structures more streamlined and
 easier to read. The main goal is to provide a better experience and let developers develop faster.
