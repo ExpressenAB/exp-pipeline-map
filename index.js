@@ -21,7 +21,7 @@ module.exports = class ExpPipelineMap extends Promise {
     return this.then((object) => {
       const targetObject = {};
 
-      properties.filter((property) => object.hasOwnProperty(property))
+      properties.sort().filter((property) => object.hasOwnProperty(property))
         .forEach((property) => {
           targetObject[property] = object[property];
         });

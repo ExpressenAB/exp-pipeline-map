@@ -18,6 +18,14 @@ describe("mapperHelper", () => {
       expect(Mapper.transform(sourceObject).select([])).to.be.an.instanceof(Mapper);
     });
 
+    it("sorts the properties alphabetically", () => {
+      return Mapper.transform(sourceObject)
+        .select("one", "two", "three")
+        .then((response) => {
+          expect(Object.keys(response)).to.eql(["one", "three", "two"]);
+        })
+    });
+
     it("Selects properties", () => {
       const result = {one: 1, three: 3};
       return Mapper.transform(sourceObject)
@@ -84,8 +92,19 @@ describe("mapperHelper", () => {
       const result = { one: 1, two: 2 };
       return Mapper.transform(sourceObject)
         .add("two", new Promise((r) => {
-          setTimeout(() => r(2), 4);
+          setTimeout(() => r(2), 0);
         }))
+        .then((object) => expect(object).to.eql(result));
+    });
+
+    it("handles creation of property by function that returns a promise", () => {
+      const result = { one: 1, two: 2 };
+      return Mapper.transform(sourceObject)
+        .add("two", () => {
+          return new Promise((r) => {
+            setTimeout(() => r(2), 0);
+          });
+        })
         .then((object) => expect(object).to.eql(result));
     });
   });
