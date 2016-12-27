@@ -4,7 +4,7 @@ const clone = (object) => JSON.parse(JSON.stringify(object));
 
 module.exports = class ExpPipelineMap extends Promise {
 
-  static start(input) {
+  static transform(input) {
     return this.resolve(clone(input));
   }
 
