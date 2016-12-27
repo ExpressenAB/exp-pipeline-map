@@ -4,7 +4,7 @@
   "description": "Pipe-based interface for object transformations",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/tests.js"
+    "test": "mocha test"
   },
   "keywords": [
     "Javascript",
