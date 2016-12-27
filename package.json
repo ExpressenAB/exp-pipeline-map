@@ -17,6 +17,7 @@
   "author": "Johan Tell",
   "license": "MIT",
   "devDependencies": {
+    "blanket": "^1.2.3",
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
   }
