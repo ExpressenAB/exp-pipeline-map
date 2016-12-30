@@ -1,6 +1,6 @@
 {
   "name": "exp-pipeline-map",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pipe-based interface for object transformations",
   "main": "index.js",
   "scripts": {
