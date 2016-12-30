@@ -127,6 +127,14 @@ describe("mapperHelper", () => {
         .then((response) => expect(response).to.eql(result));
     });
 
+    it("can perform a deep transform", () => {
+      const deepSourceObject = {one: 1, two:{insideTwo: {deepInside: 2}}};
+      const result = {one: 1, two: {insideTwo: {deepInside: 4}}};
+      return Mapper.transform(deepSourceObject)
+        .transform("two.insideTwo.deepInside", multiplyByTwo)
+        .then((response) => expect(response).to.eql(result));
+    });
+
     it("can handle an async transformation", () => {
       const result = { one: 1, two: 4 };
       const asyncMultiply = (value) => {

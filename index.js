@@ -80,6 +80,10 @@ module.exports = class ExpPipelineMap extends Promise {
    *
    */
   transform(property, transformer) {
+    if (property.indexOf(".") > -1) {
+      return this._deepTransform(property, transformer);
+    }
+
     return this.then((object) => {
       if (!object.hasOwnProperty(property)) {
         return this.constructor.resolve(object);
@@ -87,6 +91,28 @@ module.exports = class ExpPipelineMap extends Promise {
 
       return this.constructor.resolve()
         .then(() => transformer(object[property], object))
+        .then((result) => {
+          object[property] = result;
+          return object;
+        });
+    });
+  }
+
+  /**
+   *
+   */
+  _deepTransform(property, transformer) {
+    return this.then((object) => {
+      let path;
+      [property, ...path] = property.split(".");
+      path = path.join(".");
+
+      if (!object.hasOwnProperty(property)) {
+        return this.constructor.resolve(object);
+      }
+
+      return this.constructor.transform(object[property])
+        .transform(path, transformer)
         .then((result) => {
           object[property] = result;
           return object;
