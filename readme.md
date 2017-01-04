@@ -18,7 +18,7 @@ const input = {
   interests: ["Coding", "Drinking", "Slacking"]  
 };
 
-Mapper.pipeline(input)
+Mapper.pipe(input)
   .select("name", "lastName", "interests")
   .mapOn("interests", (interest) => interest.toLowerCase())
   .filterOn("interests", (interest) => interest !== "slacking")
