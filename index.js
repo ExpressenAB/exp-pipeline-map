@@ -90,9 +90,9 @@ module.exports = class ExpPipelineMap extends Promise {
   /**
    *
    */
-  transform(property, transformer) {
+  modify(property, transformer) {
     if (property.indexOf(".") > -1) {
-      return this._deepTransform(property, transformer);
+      return this._deepModify(property, transformer);
     }
 
     return this.then((object) => {
@@ -112,7 +112,7 @@ module.exports = class ExpPipelineMap extends Promise {
   /**
    *
    */
-  _deepTransform(property, transformer) {
+  _deepModify(property, transformer) {
     return this.then((object) => {
       let path;
       [property, ...path] = property.split(".");
@@ -123,7 +123,7 @@ module.exports = class ExpPipelineMap extends Promise {
       }
 
       return this.constructor.pipe(object[property])
-        .transform(path, transformer)
+        .modify(path, transformer)
         .then((result) => {
           object[property] = result;
           return object;

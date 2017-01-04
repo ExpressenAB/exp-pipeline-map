@@ -53,7 +53,7 @@ Maps a collection with given method
 Filters a collection with given method. Note that this method is supposed to return a boolean
 where true means keep and false means do not keep.
 
-### `transform(key, fn|value)`
+### `modify(key, fn|value)`
 Transforms a key with a method taking the value as first argument or a direct value
 
 ### `rename(key, newName)`

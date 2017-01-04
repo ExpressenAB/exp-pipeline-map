@@ -117,13 +117,13 @@ describe("mapperHelper", () => {
     const multiplyByTwo = (value) => value * 2;
 
     it("returns a mapper", () => {
-      expect(Mapper.pipe(sourceObject).transform("one", multiplyByTwo)).to.be.an.instanceof(Mapper);
+      expect(Mapper.pipe(sourceObject).modify("one", multiplyByTwo)).to.be.an.instanceof(Mapper);
     });
 
     it("transforms a property", () => {
       const result = {one: 2, two: 2};
       return Mapper.pipe(sourceObject)
-        .transform("one", multiplyByTwo)
+        .modify("one", multiplyByTwo)
         .then((response) => expect(response).to.eql(result));
     });
 
@@ -131,7 +131,7 @@ describe("mapperHelper", () => {
       const deepSourceObject = {one: 1, two: {insideTwo: {deepInside: 2}}};
       const result = {one: 1, two: {insideTwo: {deepInside: 4}}};
       return Mapper.pipe(deepSourceObject)
-        .transform("two.insideTwo.deepInside", multiplyByTwo)
+        .modify("two.insideTwo.deepInside", multiplyByTwo)
         .then((response) => expect(response).to.eql(result));
     });
 
@@ -145,14 +145,14 @@ describe("mapperHelper", () => {
         });
       };
       return Mapper.pipe(sourceObject)
-        .transform("two", asyncMultiply)
+        .modify("two", asyncMultiply)
         .then((response) => expect(response).to.eql(result));
     });
 
     it("Does not transform non-existing properties", () => {
       const result = {one: 1, two: 2};
       return Mapper.pipe(sourceObject)
-        .transform("four", multiplyByTwo)
+        .modify("four", multiplyByTwo)
         .then((response) => expect(response).to.eql(result));
     });
   });
