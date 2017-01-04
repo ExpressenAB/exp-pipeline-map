@@ -4,7 +4,7 @@ const clone = (object) => JSON.parse(JSON.stringify(object));
 
 module.exports = class ExpPipelineMap extends Promise {
 
-  static transform(input) {
+  static pipe(input) {
     return this.resolve(clone(input));
   }
 
@@ -122,7 +122,7 @@ module.exports = class ExpPipelineMap extends Promise {
         return this.constructor.resolve(object);
       }
 
-      return this.constructor.transform(object[property])
+      return this.constructor.pipe(object[property])
         .transform(path, transformer)
         .then((result) => {
           object[property] = result;
@@ -149,7 +149,7 @@ module.exports = class ExpPipelineMap extends Promise {
   /**
    *
    */
-  breakout(fn) {
+  tap(fn) {
     return this.then((value) => {
       fn(value);
       return value;

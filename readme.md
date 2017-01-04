@@ -18,7 +18,7 @@ const input = {
   interests: ["Coding", "Drinking", "Slacking"]  
 };
 
-Mapper.transform(input)
+Mapper.pipeline(input)
   .select("name", "lastName", "interests")
   .mapOn("interests", (interest) => interest.toLowerCase())
   .filterOn("interests", (interest) => interest !== "slacking")
@@ -37,6 +37,9 @@ Mapper.transform(input)
 ```
 ## Available methods
 
+### `pipe(value)`
+Used for starting the mapping chain. It is an alias of `resolve`.
+
 ### `select(key[, ...keys])`
 Filters the current objects properties in a selective manner
 
@@ -50,11 +53,14 @@ Maps a collection with given method
 Filters a collection with given method. Note that this method is supposed to return a boolean
 where true means keep and false means do not keep.
 
+### `transform(key, fn|value)`
+Transforms a key with a method taking the value as first argument or a direct value
+
 ### `add(key, fn|value)`
 Adds a property to the object. It will either be a direct value or the result of the provided method.
 Will handle returned promises.
 
-## `breakout(fn)`
+## `tap(fn)`
 Executes the provided method but discards it's returned value and instead pipes through the object as is.
 Very useful for logging or out of band operations.
 
