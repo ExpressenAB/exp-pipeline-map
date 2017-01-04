@@ -56,6 +56,9 @@ where true means keep and false means do not keep.
 ### `transform(key, fn|value)`
 Transforms a key with a method taking the value as first argument or a direct value
 
+### `rename(key, newName)`
+Renames a key
+
 ### `add(key, fn|value)`
 Adds a property to the object. It will either be a direct value or the result of the provided method.
 Will handle returned promises.
