@@ -79,6 +79,17 @@ module.exports = class ExpPipelineMap extends Promise {
   /**
    *
    */
+  rename(property, newKeyName) {
+    return this.then((object) => {
+      object[newKeyName] = object[property];
+      delete object[property];
+      return object;
+    });
+  }
+
+  /**
+   *
+   */
   transform(property, transformer) {
     if (property.indexOf(".") > -1) {
       return this._deepTransform(property, transformer);

@@ -77,5 +77,10 @@
     "space-unary-ops": [1, { "words": true, "nonwords": false }],
     "strict": [2, "global"],
     "yoda": [1, "never"]
+  },
+  "globals": {
+    "describe": true,
+    "context": true,
+    "it": true
   }
 }

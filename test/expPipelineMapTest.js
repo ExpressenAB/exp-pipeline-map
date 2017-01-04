@@ -23,7 +23,7 @@ describe("mapperHelper", () => {
         .select("one", "two", "three")
         .then((response) => {
           expect(Object.keys(response)).to.eql(["one", "three", "two"]);
-        })
+        });
     });
 
     it("Selects properties", () => {
@@ -128,7 +128,7 @@ describe("mapperHelper", () => {
     });
 
     it("can perform a deep transform", () => {
-      const deepSourceObject = {one: 1, two:{insideTwo: {deepInside: 2}}};
+      const deepSourceObject = {one: 1, two: {insideTwo: {deepInside: 2}}};
       const result = {one: 1, two: {insideTwo: {deepInside: 4}}};
       return Mapper.transform(deepSourceObject)
         .transform("two.insideTwo.deepInside", multiplyByTwo)
@@ -153,6 +153,17 @@ describe("mapperHelper", () => {
       const result = {one: 1, two: 2};
       return Mapper.transform(sourceObject)
         .transform("four", multiplyByTwo)
+        .then((response) => expect(response).to.eql(result));
+    });
+  });
+
+  context("#rename", () => {
+    const sourceObject = { key: "value" };
+
+    it("renames a key", () => {
+      const result = { newKey: "value" };
+      return Mapper.transform(sourceObject)
+        .rename("key", "newKey")
         .then((response) => expect(response).to.eql(result));
     });
   });
@@ -235,7 +246,7 @@ describe("mapperHelper", () => {
 
   context("#breakout", () => {
     const sourceObject = { one: 1 };
-    const empty = function(){};
+    const empty = function () { };
 
     it("returns a mapper", () => {
       expect(Mapper.transform(sourceObject).breakout(empty)).to.be.an.instanceof(Mapper);
@@ -247,6 +258,6 @@ describe("mapperHelper", () => {
         .then((result) => {
           expect(result).to.eql(sourceObject);
         });
-    })
-  })
+    });
+  });
 });
